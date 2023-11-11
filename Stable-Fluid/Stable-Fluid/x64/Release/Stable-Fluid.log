@@ -1,0 +1,36 @@
+﻿  draw.cpp
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include\eigen-3.4.0\Eigen\src\Core\arch\Default\Half.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include\eigen-3.4.0\Eigen\src\Core\arch\Default\BFloat16.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include\eigen-3.4.0\Eigen\src\Core\arch\Default\GenericPacketMathFunctions.h(676,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(32,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(33,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(37,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(38,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(39,13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(40,13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(145,27): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\fluid-Euler.h(86,14): message : 查看对正在编译的函数 模板 实例化“int draw<Fluid_Euler>(Fluid_Euler *,float,int)”的引用
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(151,26): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\draw.cpp(197,57): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+LINK : warning LNK4098: 默认库“MSVCRTD”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+  正在生成代码
+  4 of 1365 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+glfw3.lib(context.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(context.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(input.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(input.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(init.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(init.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(window.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(window.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_thread.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(win32_thread.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_window.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(win32_window.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_joystick.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(win32_joystick.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_time.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(win32_time.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_init.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(win32_init.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_monitor.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(win32_monitor.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(monitor.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(monitor.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(vulkan.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(vulkan.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(wgl_context.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(wgl_context.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(egl_context.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(egl_context.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(osmesa_context.obj) : warning LNK4099: 未找到 PDB“”(使用“glfw3.lib(osmesa_context.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+  Stable-Fluid.vcxproj -> C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\x64\Release\Stable-Fluid.exe
