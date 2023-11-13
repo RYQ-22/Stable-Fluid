@@ -47,6 +47,7 @@ private:
 	Vec3<int> Vz_valid_;
 	// matrix
 	Vec3<int> Adiag, Aplusi, Aplusj, Aplusk;
+	Vec3<float> d, p, precon, q;
 
 public:
 	Grid();
@@ -67,16 +68,23 @@ private:
 	Grid grid_;
 public:
 	Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<int> solid);
-	// kernel function
+
+	bool valid(int i, int j, int k);// test if (i, j, k) is liquid
 
 	void update(float dt);
-	void add_force(float dt);
-	void advect(float dt);
-	void project(float dt);
+
+	// update fluid
+	void add_force(float dt);// 1. add force
+	void advect(float dt);// 2. advect
+	void project(float dt);// 3. project
+	void solve();// solve: A * p = d;
+
+	// some details
 	void compute_phi(float dt);
 	void extrapolate();
 	void constrain();
 
+	// rendering
 	std::vector<float> vertices();
 	std::vector<unsigned int> indices();
 	int show(float dt, int n);

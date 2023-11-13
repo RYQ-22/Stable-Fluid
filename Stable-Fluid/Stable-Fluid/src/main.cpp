@@ -1,21 +1,22 @@
 #include "fluid-Euler.h"
+#include "geometry.h"
 
 #include <iostream>
 #include <math.h>
 //#include <cuda_runtime.h>
 
 int main() {
-    int n1 = 20;
-    int n2 = 20;
-    int n3 = 20;
+    int n1 = 60;
+    int n2 = 60;
+    int n3 = 60;
     float l = 0.01f;
     std::vector<float> phi;
     std::vector<int> solid;
     phi.resize(n1 * n2 * n3);
     solid.resize(n1 * n2 * n3, 0);
     // set solid
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n1; j++) {
             solid[(0) * n2 * n3 + (i)*n3 + (j)] = 1;
             solid[(n1 - 1) * n2 * n3 + (i)*n3 + (j)] = 1;
             solid[(i)*n2 * n3 + (0) * n3 + (j)] = 1;
@@ -62,8 +63,10 @@ int main() {
         }
     }
 
-    Fluid_Euler fluid_Euler(n1, n2, n3, l, phi, solid);
+    std::vector<float> phi_bunny;
+    obj_2_SDF(n1, n2, n3, 20, l, "C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/OBJ/bunny_200.obj", phi_bunny);
+
+    Fluid_Euler fluid_Euler(n1, n2, n3, l, phi_bunny, solid);
     fluid_Euler.show(0.001f, 1);
     return 0;
 }
-

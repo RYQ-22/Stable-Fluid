@@ -11,22 +11,33 @@ Grid::Grid(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<
 		std::cout << "init solid set error!" << std::endl;
 		abort();
 	}
+
 	x_.resize(N1, N2, N3);
 	y_.resize(N1, N2, N3);
 	z_.resize(N1, N2, N3);
+
 	Vx_.resize((N1 + 1), N2, N3);
 	Vy_.resize(N1, (N2 + 1), N3);
 	Vz_.resize(N1, N2, (N3 + 1));
+
 	idx_.resize(N1, N2, N3);
+
 	Vx_valid_.resize(N1 + 1, N2, N3);
 	Vy_valid_.resize(N1, N2 + 1, N3);
 	Vz_valid_.resize(N1, N2, N3 + 1);
+
 	Adiag.resize(N1, N2, N3);
 	Aplusi.resize(N1, N2, N3);
 	Aplusj.resize(N1, N2, N3);
 	Aplusk.resize(N1, N2, N3);
+	d.resize(N1, N2, N3);
+	p.resize(N1, N2, N3);
+	precon.resize(N1, N2, N3);
+	q.resize(N1, N2, N3);
+
 	phi_ = Vec3<float>(N1, N2, N3, phi);
 	solid_ = Vec3<int>(N1, N2, N3, solid);
+
 	for (int i = 0; i < N1; i++) {
 		for (int j = 0; j < N2; j++) {
 			for (int k = 0; k < N3; k++) {
@@ -115,6 +126,14 @@ Fluid_Euler::Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi
 	grid_ = Grid(N1, N2, N3, l, phi, solid);
 }
 
+bool Fluid_Euler::valid(int i, int j, int k) {// fluid, and not in solid
+	if (i >= 0 && i < grid_.N1_ && j >= 0 && j < grid_.N2_ && k >= 0 && k < grid_.N3_ && grid_.solid_(i, j, k) == 0 && grid_.phi_(i, j, k) < 0.0f) {
+		return true;
+	}
+	return false;
+}
+
+
 void Fluid_Euler::add_force(float dt) {
 	for (int i = 0; i < grid_.N1_ + 1; i++) for (int j = 0; j < grid_.N2_ + 1; j++) for (int k = 0; k < grid_.N3_ + 1; k++) {
 		// Vy
@@ -162,6 +181,7 @@ void Fluid_Euler::advect(float dt) {
 	return;
 }
 
+/*
 void Fluid_Euler::project(float dt) {
 	// compute number of fluid grids
 	grid_.N_fluid_ = 0;
@@ -210,7 +230,6 @@ void Fluid_Euler::project(float dt) {
 	}
 
 	A.makeCompressed();
-	d = d * (1.0f * l_ / dt * rho_);
 
 	// CG
 	Eigen::ConjugateGradient<Eigen::SparseMatrix<float>> cg;
@@ -228,9 +247,9 @@ void Fluid_Euler::project(float dt) {
 					if ((i < grid_.N1_ && (grid_.phi_(i, j, k) < 0.0f && grid_.solid_(i, j, k) == 0)) || (i != 0 && (grid_.phi_(i - 1, j, k) < 0.0f && grid_.solid_(i - 1, j, k) == 0))) {
 						if (!(i < grid_.N1_ && grid_.solid_(i, j, k) == 1) && !(i != 0 && grid_.solid_(i - 1, j, k) == 1)) {// not solid
 							if (i < grid_.N1_ && grid_.phi_(i, j, k) < 0.0f)// p+
-								grid_.Vx_(i, j, k) += -p(grid_.idx_(i, j, k)) / l_ * dt / rho_;
+								grid_.Vx_(i, j, k) += -p(grid_.idx_(i, j, k));
 							if (i != 0 && grid_.phi_(i - 1, j, k) < 0.0f)// p-
-								grid_.Vx_(i, j, k) += p(grid_.idx_(i - 1, j, k)) / l_ * dt / rho_;
+								grid_.Vx_(i, j, k) += p(grid_.idx_(i - 1, j, k));
 						}
 					}
 				}
@@ -239,9 +258,9 @@ void Fluid_Euler::project(float dt) {
 					if ((j < grid_.N2_ && (grid_.phi_(i, j, k) < 0.0f && grid_.solid_(i, j, k) == 0)) || (j != 0 && (grid_.phi_(i, j - 1, k) < 0.0f && grid_.solid_(i, j - 1, k) == 0))) {
 						if (!(j < grid_.N2_ && grid_.solid_(i, j, k) == 1) && !(j != 0 && grid_.solid_(i, j - 1, k) == 1)) {// not solid
 							if (j < grid_.N2_ && grid_.phi_(i, j, k) < 0.0f)// p+
-								grid_.Vy_(i, j, k) += -p(grid_.idx_(i, j, k)) / l_ * dt / rho_;
+								grid_.Vy_(i, j, k) += -p(grid_.idx_(i, j, k));
 							if (j != 0 && grid_.phi_(i, j - 1, k) < 0.0f)// p-
-								grid_.Vy_(i, j, k) += p(grid_.idx_(i, j - 1, k)) / l_ * dt / rho_;
+								grid_.Vy_(i, j, k) += p(grid_.idx_(i, j - 1, k));
 						}
 					}
 				}
@@ -250,13 +269,138 @@ void Fluid_Euler::project(float dt) {
 					if ((k < grid_.N3_ && (grid_.phi_(i, j, k) < 0.0f && grid_.solid_(i, j, k) == 0)) || (k != 0 && (grid_.phi_(i, j, k - 1) < 0.0f && grid_.solid_(i, j, k - 1) == 0))) {
 						if (!(k < grid_.N3_ && grid_.solid_(i, j, k) == 1) && !(k != 0 && grid_.solid_(i, j, k - 1) == 1)) {// not solid
 							if (k < grid_.N3_ && grid_.phi_(i, j, k) < 0.0f)// p+
-								grid_.Vz_(i, j, k) += -p(grid_.idx_(i, j, k)) / l_ * dt / rho_;
+								grid_.Vz_(i, j, k) += -p(grid_.idx_(i, j, k));
 							if (k != 0 && grid_.phi_(i, j, k - 1) < 0.0f)// p-
-								grid_.Vz_(i, j, k) += p(grid_.idx_(i, j, k - 1)) / l_ * dt / rho_;
+								grid_.Vz_(i, j, k) += p(grid_.idx_(i, j, k - 1));
 						}
 					}
 				}
 			}
+		}
+	}
+}
+*/
+
+void Fluid_Euler::project(float dt) {
+	// compute A, d
+	for (int i = 0; i < grid_.N1_; i++) for (int j = 0; j < grid_.N2_; j++) for (int k = 0; k < grid_.N3_; k++) {		
+		if (valid(i, j, k)) {// for liquid
+			grid_.Adiag(i, j, k) = 0;
+			grid_.Aplusi(i, j, k) = 0;
+			grid_.Aplusj(i, j, k) = 0;
+			grid_.Aplusk(i, j, k) = 0;
+			grid_.d(i, j, k) = 0;
+			for (int i1 = -1; i1 <= 1; i1 += 2) {
+				grid_.Adiag(i, j, k) += 1 - grid_.solid_(i + i1, j, k) + 1 - grid_.solid_(i, j + i1, k) + 1 - grid_.solid_(i, j, k + i1);
+				if(i1 == 1) {
+					grid_.d(i, j, k) += grid_.solid_(i + 1, j, k) == 0 ? -grid_.Vx_(i + 1, j, k) : 0;
+					grid_.d(i, j, k) += grid_.solid_(i, j + 1, k) == 0 ? -grid_.Vy_(i, j + 1, k) : 0;
+					grid_.d(i, j, k) += grid_.solid_(i, j, k + 1) == 0 ? -grid_.Vz_(i, j, k + 1) : 0;
+				}
+				if (i1 == -1) {
+					grid_.d(i, j, k) += grid_.solid_(i - 1, j, k) == 0 ? grid_.Vx_(i, j, k) : 0;
+					grid_.d(i, j, k) += grid_.solid_(i, j - 1, k) == 0 ? grid_.Vy_(i, j, k) : 0;
+					grid_.d(i, j, k) += grid_.solid_(i, j, k - 1) == 0 ? grid_.Vz_(i, j, k) : 0;
+				}
+			}
+			if (valid(i + 1, j, k)) {
+				grid_.Aplusi(i, j, k) = -1.0f;
+			}
+			if (valid(i, j + 1, k)) {
+				grid_.Aplusj(i, j, k) = -1.0f;
+			}
+			if (valid(i, j, k + 1)) {
+				grid_.Aplusk(i, j, k) = -1.0f;
+			}
+		}
+	}
+	// solve: A * p = d
+	solve();
+	// update Vx, Vy, Vz
+	for (int i = 0; i < grid_.N1_ + 1; i++) for (int j = 0; j < grid_.N2_ + 1; j++) for (int k = 0; k < grid_.N3_ + 1; k++) {
+		// Vx
+		if (j < grid_.N2_ && k < grid_.N3_) {
+			if ((i < grid_.N1_ && valid(i, j, k)) || (i != 0 && valid(i - 1, j, k))) {// liquid neighbor
+				if (!(i < grid_.N1_ && grid_.solid_(i, j, k) == 1) && !(i != 0 && grid_.solid_(i - 1, j, k) == 1)) {// not solid
+					if (i < grid_.N1_ && grid_.phi_(i, j, k) < 0.0f)// p+
+						grid_.Vx_(i, j, k) += -grid_.p(i, j, k);
+					if (i != 0 && grid_.phi_(i - 1, j, k) < 0.0f)// p-
+						grid_.Vx_(i, j, k) += grid_.p(i - 1, j, k);
+				}
+			}
+		}
+		// Vy
+		if (i < grid_.N1_ && k < grid_.N3_) {
+			if ((j < grid_.N2_ && valid(i, j, k)) || (j != 0 && valid(i, j - 1, k))) {
+				if (!(j < grid_.N2_ && grid_.solid_(i, j, k) == 1) && !(j != 0 && grid_.solid_(i, j - 1, k) == 1)) {// not solid
+					if (j < grid_.N2_ && grid_.phi_(i, j, k) < 0.0f)// p+
+						grid_.Vy_(i, j, k) += -grid_.p(i, j, k);
+					if (j != 0 && grid_.phi_(i, j - 1, k) < 0.0f)// p-
+						grid_.Vy_(i, j, k) += grid_.p(i, j - 1, k);
+				}
+			}
+		}
+		// Vz
+		if (i < grid_.N1_ && j < grid_.N2_) {
+			if ((k < grid_.N3_ && valid(i, j, k)) || (k != 0 && valid(i, j, k - 1))) {
+				if (!(k < grid_.N3_ && grid_.solid_(i, j, k) == 1) && !(k != 0 && grid_.solid_(i, j, k - 1) == 1)) {// not solid
+					if (k < grid_.N3_ && grid_.phi_(i, j, k) < 0.0f)// p+
+						grid_.Vz_(i, j, k) += -grid_.p(i, j, k);
+					if (k != 0 && grid_.phi_(i, j, k - 1) < 0.0f)// p-
+						grid_.Vz_(i, j, k) += grid_.p(i, j, k - 1);
+				}
+			}
+		}
+	}
+}
+
+void Fluid_Euler::solve() {
+	// compute precon
+	float tau = 0.97f;
+	float e = 0.0f;
+	for (int i = 0; i < grid_.N1_; i++) for (int j = 0; j < grid_.N2_; j++) for (int k = 0; k < grid_.N3_; k++) {
+		if (valid(i, j, k)) {
+			e = grid_.Adiag(i, j, k);
+			if (valid(i - 1, j, k))
+				e += -pow(grid_.Aplusi(i - 1, j, k) * grid_.precon(i - 1, j, k), 2) - tau * grid_.Aplusi(i - 1, j, k) * (grid_.Aplusj(i - 1, j, k) + grid_.Aplusk(i - 1, j, k)) * pow(grid_.precon(i - 1, j, k), 2);
+			if (valid(i, j - 1, k))
+				e += -pow(grid_.Aplusj(i, j - 1, k) * grid_.precon(i, j - 1, k), 2) - tau * grid_.Aplusj(i, j - 1, k) * (grid_.Aplusi(i, j - 1, k) + grid_.Aplusk(i, j - 1, k)) * pow(grid_.precon(i, j - 1, k), 2);
+			if (valid(i, j, k - 1))
+				e += -pow(grid_.Aplusk(i, j, k - 1) * grid_.precon(i, j, k - 1), 2) - tau * grid_.Aplusk(i, j, k - 1) * (grid_.Aplusi(i, j, k - 1) + grid_.Aplusj(i, j, k - 1)) * pow(grid_.precon(i, j, k - 1), 2);
+			grid_.precon(i, j, k) = 1 / pow(e + 1e-10f, 0.5f);
+		}
+	}
+	// solve Lq = d
+	float t = 0.0f;
+	for (int i = 0; i < grid_.N1_; i++) for (int j = 0; j < grid_.N2_; j++) for (int k = 0; k < grid_.N3_; k++) {
+		if (valid(i, j, k)) {
+			t = grid_.d(i, j, k);
+			if (valid(i - 1, j, k))
+				t += -grid_.Aplusi(i - 1, j, k) * grid_.precon(i - 1, j, k) * grid_.q(i - 1, j, k);
+			if (valid(i, j - 1, k))
+				t += -grid_.Aplusj(i, j - 1, k) * grid_.precon(i, j - 1, k) * grid_.q(i, j - 1, k);
+			if (valid(i, j, k - 1))
+				t += -grid_.Aplusk(i, j, k - 1) * grid_.precon(i, j, k - 1) * grid_.q(i, j, k - 1);
+			grid_.q(i, j, k) = t * grid_.precon(i, j, k);
+		}
+	}
+	//solve L^T p = q
+	for (int i = grid_.N1_ - 1; i >= 0; i--) for (int j = grid_.N2_ - 1; j >= 0; j--) for (int k = grid_.N3_; k >= 0; k--) {
+		if (valid(i, j, k)) {
+			t = grid_.q(i, j, k);
+			if (valid(i + 1, j, k))
+				t += -grid_.Aplusi(i, j, k) * grid_.precon(i, j, k) * grid_.p(i + 1, j, k);
+			if (valid(i, j + 1, k))
+				t += -grid_.Aplusj(i, j, k) * grid_.precon(i, j, k) * grid_.p(i, j + 1, k);
+			if (valid(i, j, k + 1))
+				t += -grid_.Aplusk(i, j, k) * grid_.precon(i, j, k) * grid_.p(i, j, k + 1);
+			grid_.p(i, j, k) = t * grid_.precon(i, j, k);
+		}
+	}
+	// set p = 0 for air
+	for (int i = 0; i < grid_.N1_; i++) for (int j = 0; j < grid_.N2_; j++) for (int k = 0; k < grid_.N3_; k++) {
+		if (grid_.solid_(i, j, k) == 0 && grid_.phi_(i, j, k) > 0) {
+			grid_.p(i, j, k) = 0.0f;
 		}
 	}
 }
@@ -308,7 +452,7 @@ void Fluid_Euler::extrapolate() {
 		}
 	}
 	// Apply several iterations of a very simple propagation of valid velocity data in all directions
-	for (int num = 0; num < 10; num++) {
+	for (int num = 0; num < 15; num++) {
 		for (int i = 0; i < grid_.N1_ + 1; i++) for (int j = 0; j < grid_.N2_ + 1; j++) for (int k = 0; k < grid_.N3_ + 1; k++) {
 			float vx = 0, vy = 0, vz = 0;
 			int countx = 0, county = 0, countz = 0;
@@ -457,20 +601,16 @@ std::vector<float> Fluid_Euler::vertices() {
 
 	grid_.N_fluid_ = 0;
 	for (int i0 = 0; i0 < grid_.N1_; i0++) for (int j0 = 0; j0 < grid_.N2_; j0++) for (int k0 = 0; k0 < grid_.N3_; k0++) {
-		if (grid_.solid_(i0, j0, k0) == 0 && grid_.phi_(i0, j0, k0) < 0.0f) {
+		if (valid(i0, j0, k0)) {
 			grid_.N_fluid_++;
-			for (int i = -1; i <= 1; i += 2) {
-				for (int j = -1; j <= 1; j += 2) {
-					for (int k = -1; k <= 1; k += 2) {
-						vertices.push_back(10 * (grid_.x_(i0, j0, k0) + 0.5f * l_ * i));
-						vertices.push_back(10 * (grid_.y_(i0, j0, k0) + 0.5f * l_ * j));
-						vertices.push_back(10 * (grid_.z_(i0, j0, k0) + 0.5f * l_ * k));
-						vertices.push_back(0.67843f);
-						vertices.push_back(0.84706f);
-						vertices.push_back(0.90196f);
-					}
-				}
-			}
+			for (int i = -1; i <= 1; i += 2) for (int j = -1; j <= 1; j += 2) for (int k = -1; k <= 1; k += 2) {
+				vertices.push_back(10 * (grid_.x_(i0, j0, k0) + 0.5f * l_ * i));
+				vertices.push_back(10 * (grid_.y_(i0, j0, k0) + 0.5f * l_ * j));
+				vertices.push_back(10 * (grid_.z_(i0, j0, k0) + 0.5f * l_ * k));
+				vertices.push_back(0.67843f);
+				vertices.push_back(0.84706f);
+				vertices.push_back(0.90196f);
+			}					
 		}
 	}
 

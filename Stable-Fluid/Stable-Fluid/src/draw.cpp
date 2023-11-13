@@ -153,7 +153,7 @@ int draw(T* obj, float dt, int n) {
         if (deltaTime_tot >= 0.5f) {
             //std::cout << "fps: " << frameRate / 60 << std::endl;
             std::stringstream ss;
-            ss << "Learn OpenGL (" << std::setprecision(4) << frameRate / count << " FPS)";
+            ss << "Stable Fluid (" << std::setprecision(4) << frameRate / count << " FPS)";
             std::string title = ss.str();
             glfwSetWindowTitle(window, title.c_str());
             frameRate = 0;
