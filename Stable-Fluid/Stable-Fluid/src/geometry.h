@@ -9,6 +9,9 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+aiVector3D Cross(const aiVector3D& e1, const aiVector3D& e2);
+float Dot(const aiVector3D& e1, const aiVector3D& e2);
+
 float computeDis(aiVector3D& v0, aiVector3D& v1, aiVector3D& v2, aiVector3D& x);
 float computeSDF(const aiScene* scene, aiVector3D& x);
 

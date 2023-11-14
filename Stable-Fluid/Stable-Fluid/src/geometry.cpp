@@ -1,11 +1,29 @@
 #include "geometry.h"
 
+aiVector3D Cross(const aiVector3D& e1, const aiVector3D& e2) {
+	return aiVector3D(e1.y * e2.z - e1.z * e2.y, e1.z * e2.x - e1.x * e2.z, e1.x * e2.y - e1.y * e2.x);
+}
+
+float Dot(const aiVector3D& e1, const aiVector3D& e2) {
+	return e1.x * e2.x + e1.y * e2.y + e1.z * e2.z;
+}
+
 float computeDis(aiVector3D& v0, aiVector3D& v1, aiVector3D& v2, aiVector3D& x) {
+	aiVector3D rc = (v0 + v1 + v2) / 3.0f;
 	aiVector3D r = x - v0;
 	aiVector3D e1 = v1 - v0;
-	aiVector3D e2 = v2 - v0;
-	aiVector3D n = (aiVector3D(e1.y * e2.z - e1.z * e2.y, e1.z * e2.x - e1.x * e2.z, e1.x * e2.y - e1.y * e2.x)).Normalize();
-	return (float)(r.x * n.x + r.y * n.y + r.z * n.z);
+	aiVector3D e2 = v2 - v1;
+	aiVector3D e3 = v0 - v2;
+	aiVector3D n = Cross(e1, e2).Normalize();
+	aiVector3D xp = x - Dot(r, n) * n;// in triangle plane
+	aiVector3D d01 = Cross(e1, xp - v0);
+	aiVector3D d12 = Cross(e2, xp - v1);
+	aiVector3D d20 = Cross(e3, xp - v2);
+	bool isInTriangle = (Dot(d01, n) >= 0 && Dot(d12, n) >= 0 && Dot(d20, n) >= 0) || (Dot(d01, n) <= 0 && Dot(d12, n) <= 0 && Dot(d20, n) <= 0);
+	if (isInTriangle)
+		return Dot(r, n);
+	float dis = (r - rc).Length();
+	return dis;
 }
 
 float computeSDF(const aiScene* scene, aiVector3D& x) {
@@ -29,6 +47,7 @@ float computeSDF(const aiScene* scene, aiVector3D& x) {
 			}
 		}
 	}
+	//std::cout << phi << std::endl;
 	return phi;
 }
 
@@ -68,7 +87,8 @@ bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path
 		}
 		for (int i = 0; i < N1; i++) for (int j = 0; j < N2; j++) for (int k = 0; k < N3; k++) {
 			aiVector3D x(i + 0.5f, j + 0.5f, k + 0.5f);
-			x = x * (x_max - x_min) / size;
+			x = x * l - aiVector3D(N1 / 2 * l, N2 / 2 * l, N3 / 2 * l);
+			x = x * (x_max - x_min) / (size * l);
 			phi[i * N2 * N3 + j * N3 + k] = (size * l) / (x_max - x_min) * computeSDF(scene, x);
 		}
 	}
