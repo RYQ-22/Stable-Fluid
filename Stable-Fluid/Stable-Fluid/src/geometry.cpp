@@ -8,7 +8,7 @@ float Dot(const aiVector3D& e1, const aiVector3D& e2) {
 	return e1.x * e2.x + e1.y * e2.y + e1.z * e2.z;
 }
 
-float computeDis(aiVector3D& v0, aiVector3D& v1, aiVector3D& v2, aiVector3D& x) {
+float computeDis(const aiVector3D& v0, const aiVector3D& v1, const aiVector3D& v2, const aiVector3D& x) {
 	aiVector3D rc = (v0 + v1 + v2) / 3.0f;
 	aiVector3D r = x - v0;
 	aiVector3D e1 = v1 - v0;
@@ -26,7 +26,7 @@ float computeDis(aiVector3D& v0, aiVector3D& v1, aiVector3D& v2, aiVector3D& x) 
 	return dis;
 }
 
-float computeSDF(const aiScene* scene, aiVector3D& x) {
+float computeSDF(const aiScene* scene, const aiVector3D& x) {
 	float phi;
 	bool isFirst = true;
 	for (int i = 0; i < scene->mNumMeshes; i++) {
@@ -87,8 +87,8 @@ bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path
 		}
 		for (int i = 0; i < N1; i++) for (int j = 0; j < N2; j++) for (int k = 0; k < N3; k++) {
 			aiVector3D x(i + 0.5f, j + 0.5f, k + 0.5f);
-			x = x * l - aiVector3D(N1 / 2 * l, N2 / 2 * l, N3 / 2 * l);
-			x = x * (x_max - x_min) / (size * l);
+			x = x - aiVector3D(N1 / 2, N2 / 2, N3 / 2);// move to the center
+			x = x * (x_max - x_min) / size;
 			phi[i * N2 * N3 + j * N3 + k] = (size * l) / (x_max - x_min) * computeSDF(scene, x);
 		}
 	}

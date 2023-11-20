@@ -6,9 +6,9 @@
 //#include <cuda_runtime.h>
 
 int main() {
-    int n1 = 60;
-    int n2 = 60;
-    int n3 = 60;
+    int n1 = 40;
+    int n2 = 40;
+    int n3 = 40;
     float l = 0.01f;
     std::vector<float> phi;
     std::vector<int> solid;
@@ -63,10 +63,10 @@ int main() {
         }
     }
 
-    std::vector<float> phi_bunny;
-    obj_2_SDF(n1, n2, n3, 20, l, "C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/OBJ/bunny_200.obj", phi_bunny);
+    std::vector<float> phi_test;
+    obj_2_SDF(n1, n2, n3, 20, l, "C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/OBJ/test.obj", phi_test);
 
-    Fluid_Euler fluid_Euler(n1, n2, n3, l, phi_bunny, solid);
-    fluid_Euler.show(0.001f, 1);
+    Fluid_Euler fluid_Euler(n1, n2, n3, l, phi_test, solid);
+    fluid_Euler.show(0.002f, 1);
     return 0;
 }

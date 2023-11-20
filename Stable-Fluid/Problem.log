@@ -1,0 +1,18 @@
+(11.14)
+1. 更新phi时，solid边界的处理。时间增加，顶部固体的phi反而减小。
+	---> 每次advect后都要重新计算SDF
+2. 计算SDF（对于非SDF的level set和triangle mesh）
+	---> fluid-note
+3. 用matrix-free MICCG(0) solve时会发散
+	---> 解决方案未知
+
+(11.20)
+1. 解决了solve时发散的问题
+	---> 把auxiliary vector z 当成了 p
+2. 液体体积会一直增加
+	---> 解决方案未知
+	---> 已修复
+3. 修复了液体流动过程中不对称的问题
+	---> 求Vy_ave时一处Vy_写成了Vx_
+  
+

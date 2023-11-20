@@ -12,8 +12,8 @@
 aiVector3D Cross(const aiVector3D& e1, const aiVector3D& e2);
 float Dot(const aiVector3D& e1, const aiVector3D& e2);
 
-float computeDis(aiVector3D& v0, aiVector3D& v1, aiVector3D& v2, aiVector3D& x);
-float computeSDF(const aiScene* scene, aiVector3D& x);
+float computeDis(const aiVector3D& v0, const aiVector3D& v1, const aiVector3D& v2, const aiVector3D& x);
+float computeSDF(const aiScene* scene, const aiVector3D& x);
 
 bool obj_2_SDF(int N1, int N2, int N3, float size, float l_, std::string obj_path, std::vector<float>& phi);
 

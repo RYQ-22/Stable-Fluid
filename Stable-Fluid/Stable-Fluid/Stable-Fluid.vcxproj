@@ -33,6 +33,7 @@
     <ClInclude Include="src\fluid-Euler.h" />
     <ClInclude Include="src\geometry.h" />
     <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\util.h" />
     <ClInclude Include="src\vector3.h" />
   </ItemGroup>
   <ItemGroup>
@@ -44,7 +45,7 @@
     <ProjectGuid>{96e7c4a2-155b-4154-aeda-f38b0427041d}</ProjectGuid>
     <RootNamespace>StableFluid</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <CudaToolkitCustomDir>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6</CudaToolkitCustomDir>
+    <CudaToolkitCustomDir>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.0</CudaToolkitCustomDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -93,8 +94,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include;C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include\eigen-3.4.0;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\lib\x64</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include;C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\include\eigen-3.4.0;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.0\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.0\lib\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -144,6 +145,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
