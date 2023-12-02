@@ -33,6 +33,7 @@
     <ClInclude Include="src\fluid-Euler.h" />
     <ClInclude Include="src\geometry.h" />
     <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\solver.h" />
     <ClInclude Include="src\util.h" />
     <ClInclude Include="src\vector3.h" />
   </ItemGroup>

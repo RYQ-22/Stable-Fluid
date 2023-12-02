@@ -59,6 +59,9 @@
     <ClInclude Include="src\util.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\solver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="test.cu">

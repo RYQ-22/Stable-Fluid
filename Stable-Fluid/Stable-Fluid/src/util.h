@@ -534,4 +534,38 @@ T interpolate_value(float i, float j, float k, const Vec3<T>& v) {
         + v(i0, j0 + 1, k0 + 1) * a1 * b2 * c2;
 }
 
+template<class T>
+void interpolate_gradient(glm::vec<3, T>& grad, float i, float j, float k, const Vec3<T>& v) {
+    int i0 = i > 0 ? (int)i : (int)i - 1;
+    int j0 = j > 0 ? (int)j : (int)j - 1;
+    int k0 = k > 0 ? (int)k : (int)k - 1;
+    float a1 = i0 + 1.0f - i, a2 = i - i0;
+    float b1 = j0 + 1.0f - j, b2 = j - j0;
+    float c1 = k0 + 1.0f - k, c2 = k - k0;    
+    // x
+    T grad_x0 = v(i0 + 1, j0, k0) - v(i0, j0, k0);
+    T grad_x1 = v(i0 + 1, j0 + 1, k0) - v(i0, j0 + 1, k0);
+    T grad_x2 = v(i0 + 1, j0, k0 + 1) - v(i0, j0, k0 + 1);
+    T grad_x3 = v(i0 + 1, j0 + 1, k0 + 1) - v(i0, j0 + 1, k0 + 1);
+    grad.x = grad_x0 * b1 * c1 + grad_x3 * b2 * c2 + grad_x2 * b1 * c2 + grad_x1 * b2 * c1;
+    // y
+    T grad_y0 = v(i0, j0 + 1, k0) - v(i0, j0, k0);
+    T grad_y1 = v(i0 + 1, j0 + 1, k0) - v(i0 + 1, j0, k0);
+    T grad_y2 = v(i0, j0 + 1, k0 + 1) - v(i0, j0, k0 + 1);
+    T grad_y3 = v(i0 + 1, j0 + 1, k0 + 1) - v(i0 + 1, j0, k0 + 1);
+    grad.y = grad_y0 * a1 * c1 + grad_y3 * a2 * c2 + grad_y2 * a1 * c2 + grad_y1 * a2 * c1;
+    // z
+    T grad_z0 = v(i0, j0, k0 + 1) - v(i0, j0, k0);
+    T grad_z1 = v(i0 + 1, j0, k0 + 1) - v(i0 + 1, j0, k0);
+    T grad_z2 = v(i0, j0 + 1, k0 + 1) - v(i0, j0 + 1, k0);
+    T grad_z3 = v(i0 + 1, j0 + 1, k0 + 1) - v(i0 + 1, j0 + 1, k0);
+    grad.z = grad_z0 * a1 * b1 + grad_z3 * a2 * b2 + grad_z2 * a1 * b2 + grad_z1 * a2 * b1;
+    return;
+}
+
+template<class T>
+void interpolate_gradient(glm::vec<3, T>& grad, const glm::vec3& pos, const Vec3<T>& v) {
+    interpolate_gradient(grad, pos.x, pos.y, pos.z, v);
+}
+
 #endif

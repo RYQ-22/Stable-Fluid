@@ -18,6 +18,7 @@ public:
     Vec3(int N1, int N2, int N3);
     Vec3(int N1, int N2, int N3, const std::vector<T>& vec);
     void resize(int N1, int N2, int N3);
+    void assign(const T& value);
     int N1() const;
     int N2() const;
     int N3() const;
@@ -54,6 +55,14 @@ void Vec3<T>::resize(int N1, int N2, int N3) {
     N2_ = N2;
     N3_ = N3;
     data_.resize(N1 * N2 * N3);
+}
+
+template <typename T>
+void Vec3<T>::assign(const T& value) {
+    for (int idx = 0; idx < N1_ * N2_ * N3_; idx++) {
+        data_[idx] = value;
+    }
+    return;
 }
 
 template <typename T>

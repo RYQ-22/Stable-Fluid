@@ -12,28 +12,26 @@
 #include <time.h>
 #include <cstdlib>
 #include <ctime>
+#include <functional>
 
 #include <vector>
 #include <unordered_map>
 #include <queue>
 #include <thread>
-#include <functional>
 
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <Eigen/SparseLU>
 
 #define PI 3.1415926f
-#define G_ 9.8f
+#define G_ 9.8f * 3
 #define Gamma_ 0.1f
 
 class Grid {
 private:
-	int N1_;
-	int N2_;
-	int N3_;
-	int N_fluid_ = 0;
 	float l_;
+	int N1_, N2_, N3_;
+	int N_fluid_ = 0;
 	// position of the grid's center
 	Vec3<float> x_, y_, z_;
 	// velocity at the grid's edge
@@ -41,10 +39,9 @@ private:
 	Vec3<float> Vx_temp, Vy_temp, Vz_temp;
 	// level set
 	Vec3<float> phi_;
-	Vec3<int> known_;
-	Vec3<int> closest_;
 	// boundary
-	Vec3<int> solid_;
+	//Vec3<int> solid_;
+	Vec3<float> solid_phi_;
 	Vec3<int> idx_;
 	Vec3<int> Vx_valid_;
 	Vec3<int> Vy_valid_;
@@ -58,11 +55,14 @@ private:
 
 public:
 	Grid();
-	Grid(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<int> solid);
+	Grid(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<float> solid_phi);
 	float Vx_ave(float i, float j, float k);
 	float Vy_ave(float i, float j, float k);
 	float Vz_ave(float i, float j, float k);
 	float phi_ave(float i, float j, float k);
+	float solid_phi_ave(float i, float j, float k);
+	float solid_phi_ave(glm::vec3 pos);
+
 
 	friend class Fluid_Euler;
 };
@@ -77,9 +77,9 @@ private:
 	float particle_radius_;
 
 public:
-	Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<int> solid);
+	Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<float> solid_phi);
 
-	bool valid(int i, int j, int k);// test if (i, j, k) is liquid
+	bool valid(int i, int j, int k);// test whether (i, j, k) is liquid
 
 	void update(float dt);
 
@@ -102,9 +102,7 @@ public:
 
 	// some details
 	float compute_dt();
-	void compute_phi(float dt);
-	void recompute_SDF();
-	void recompute_SDF_loop(const int& i, const int& j, const int& k);
+	void compute_phi(float dt);	
 	void extrapolate();
 	void constrain();
 

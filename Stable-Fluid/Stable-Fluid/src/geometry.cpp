@@ -51,7 +51,7 @@ float computeSDF(const aiScene* scene, const aiVector3D& x) {
 	return phi;
 }
 
-bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path, std::vector<float>& phi) {
+bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path, std::vector<float>& phi, bool inverse) {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(obj_path, aiProcess_Triangulate | aiProcess_FlipUVs);
 	if (!scene) {
@@ -90,6 +90,7 @@ bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path
 			x = x - aiVector3D(N1 / 2, N2 / 2, N3 / 2);// move to the center
 			x = x * (x_max - x_min) / size;
 			phi[i * N2 * N3 + j * N3 + k] = (size * l) / (x_max - x_min) * computeSDF(scene, x);
+			if (inverse) phi[i * N2 * N3 + j * N3 + k] *= -1;
 		}
 	}
 }

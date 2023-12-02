@@ -15,6 +15,6 @@ float Dot(const aiVector3D& e1, const aiVector3D& e2);
 float computeDis(const aiVector3D& v0, const aiVector3D& v1, const aiVector3D& v2, const aiVector3D& x);
 float computeSDF(const aiScene* scene, const aiVector3D& x);
 
-bool obj_2_SDF(int N1, int N2, int N3, float size, float l_, std::string obj_path, std::vector<float>& phi);
+bool obj_2_SDF(int N1, int N2, int N3, float size, float l_, std::string obj_path, std::vector<float>& phi, bool inverse = false);
 
 #endif
