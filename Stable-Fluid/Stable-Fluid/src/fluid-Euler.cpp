@@ -23,6 +23,8 @@ Grid::Grid(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<
 	Vy_temp.resize(N1, (N2 + 1), N3);
 	Vz_temp.resize(N1, N2, (N3 + 1));
 
+	particles_num_.resize(N1, N2, N3);
+
 	idx_.resize(N1, N2, N3);
 
 	Vx_valid_.resize(N1 + 1, N2, N3);
@@ -75,7 +77,7 @@ float Grid::solid_phi_ave(float i, float j, float k) {
 	return interpolate_value(i, j, k, solid_phi_);
 }
 
-float Grid::solid_phi_ave(glm::vec3 pos) {
+float Grid::solid_phi_ave(const glm::vec3& pos) {
 	return interpolate_value(pos.x, pos.y, pos.z, solid_phi_);
 }
 
@@ -86,7 +88,7 @@ Fluid_Euler::Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi
 	particle_radius_ = (float)(l_ * 1.01 * sqrt(3.0) / 2.0);
 	// init particles
 	int seed = 0;
-	for (int n = 0; n < 4; n++) {
+	for (int n = 0; n < 64*4; n++) {
 		for (int i = 0; i < N1; i++) for (int j = 0; j < N2; j++) for (int k = 0; k < N3; k++) {
 			float a = randhashf(seed++); float b = randhashf(seed++); float c = randhashf(seed++);
 			float x = (float)i + a, y = (float)j + b, z = (float)k + c;
@@ -95,7 +97,9 @@ Fluid_Euler::Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi
 					particles_.push_back(glm::vec3(x * l, y * l, z * l));
 			}
 		}
-	}	
+	}
+	grid_idx_.resize(particles_.size());
+	test_val_.resize(particles_.size());
 }
 
 // Apply RK2 to advect a point in the domain.
@@ -173,12 +177,12 @@ void Fluid_Euler::advect_particles(float dt) {
 	for (int i = 0; i < particles_.size(); i++) {
 		particles_[i] = trace_rk2(particles_[i], dt);
 		// boundary
-		float phi_val = grid_.solid_phi_ave(particles_[i]);
+		float phi_val = grid_.solid_phi_ave(particles_[i]/l_);
 		if (phi_val < 0) {
 			glm::vec3 grad;
 			interpolate_gradient(grad, particles_[i] / l_, grid_.solid_phi_);
 			grad = glm::normalize(grad);			
-			//particles_[i] -= phi_val * grad;
+			particles_[i] -= phi_val * grad;
 		}
 	}
 }
@@ -475,7 +479,9 @@ void Fluid_Euler::solve(int max_iterations) {
 }
 
 void Fluid_Euler::compute_phi(float dt) {
+	grid_.particles_num_.assign(0);
 	grid_.phi_.assign(3 * l_);
+	//Vec3<float> phi_temp = grid_.phi_;
 	for (int p = 0; p < particles_.size(); p++) {
 		glm::ivec3 cell_ind(particles_[p] / l_);
 		for (int k = max(0, cell_ind[2] - 1); k <= min(cell_ind[2] + 1, grid_.N3_ - 1); ++k) {
@@ -483,12 +489,23 @@ void Fluid_Euler::compute_phi(float dt) {
 				for (int i = max(0, cell_ind[0] - 1); i <= min(cell_ind[0] + 1, grid_.N1_ - 1); ++i) {
 					glm::vec3 sample_pos((i ) * l_, (j ) * l_, (k ) * l_);					
 					float test_val = glm::length(sample_pos-particles_[p]) - particle_radius_;
-					if (test_val < grid_.phi_(i, j, k))
+					if (test_val < grid_.phi_(i, j, k)) {
+						/*
+						grid_idx_[p] = i * grid_.N2_ * grid_.N3_ + j * grid_.N3_ + k;
+						test_val_[p] = test_val;
+						grid_.particles_num_(i, j, k) += 1;
+						*/
 						grid_.phi_(i, j, k) = test_val;
+					}
 				}
 			}
 		}
 	}
+	/*
+	for (int p = 0; p < particles_.size(); p++) {
+		test_val_[p]
+	}
+	*/
 	
 	// extend phi into solid
 	for (int i = 0; i < grid_.N1_; i++) for (int j = 0; j < grid_.N2_; j++) for (int k = 0; k < grid_.N3_; k++) {
@@ -528,7 +545,7 @@ void Fluid_Euler::extrapolate() {
 		}
 	}
 	// Apply several iterations of a very simple propagation of valid velocity data in all directions
-	for (int num = 0; num < 15; num++) {
+	for (int num = 0; num < 20; num++) {
 		for (int i = 0; i < grid_.N1_ + 1; i++) for (int j = 0; j < grid_.N2_ + 1; j++) for (int k = 0; k < grid_.N3_ + 1; k++) {
 			float vx = 0, vy = 0, vz = 0;
 			int countx = 0, county = 0, countz = 0;
@@ -665,7 +682,8 @@ float Fluid_Euler::compute_dt() {
 
 
 void Fluid_Euler::update(float dt) {
-	std::cout << grid_.N_fluid_ << std::endl;
+	//std::cout << grid_.N_fluid_ << std::endl;
+	//std::cout << particles_[1].y << std::endl;
 	// 1. extrapolation
 	extrapolate();
 	// 2. update phi
@@ -686,6 +704,8 @@ void Fluid_Euler::update(float dt) {
 std::vector<float> Fluid_Euler::vertices() {
 	std::vector<float> vertices;
 
+	
+	// liquid
 	grid_.N_fluid_ = 0;
 	for (int i0 = 0; i0 < grid_.N1_; i0++) for (int j0 = 0; j0 < grid_.N2_; j0++) for (int k0 = 0; k0 < grid_.N3_; k0++) {
 		if (valid(i0, j0, k0)) {
@@ -700,6 +720,29 @@ std::vector<float> Fluid_Euler::vertices() {
 			}					
 		}
 	}
+	
+
+	/*
+	// particles
+	for (int p = 0; p < particles_.size(); p++) {
+		for (int i = -1; i <= 1; i += 2) for (int j = -1; j <= 1; j += 2) for (int k = -1; k <= 1; k += 2) {
+			vertices.push_back(10 * (particles_[p].x + 0.5f * l_ * i));
+			vertices.push_back(10 * (particles_[p].y + 0.5f * l_ * j));
+			vertices.push_back(10 * (particles_[p].z + 0.5f * l_ * k));
+			if (grid_.solid_phi_ave(particles_[p]/l_) <= 0) {
+				vertices.push_back(0.67843f);
+				vertices.push_back(0.14706f);
+				vertices.push_back(0.10196f);
+			}
+			else {
+				vertices.push_back(0.67843f);
+				vertices.push_back(0.84706f);
+				vertices.push_back(0.90196f);
+			}			
+		}
+	}
+	*/
+	
 
 	/*
 	//a plane y=0.0f
@@ -800,4 +843,78 @@ std::vector<unsigned int> Fluid_Euler::indices() {
 int Fluid_Euler::show(float dt, int n) {
 	return draw<Fluid_Euler>(this, dt, n);
 }
+
+void Fluid_Euler::run(float dt, int n) {
+	while (1) {
+		for (int i = 0; i < n; i++) {
+			update(dt);
+		}
+		// output fps
+		auto currentTime_chrono = std::chrono::high_resolution_clock::now();
+		auto duration = std::chrono::duration<float>(currentTime_chrono.time_since_epoch());
+		float currentTime = duration.count();
+		deltaTime = currentTime - lastTime;
+		lastTime = currentTime;
+		deltaTime_tot += deltaTime;
+		frameRate += 1.0 / deltaTime;
+		count++;
+		// print
+		if (deltaTime_tot >= 0.5f) {
+			std::cout << std::setprecision(4) << frameRate / count << " FPS\n";
+			frameRate = 0;
+			count = 0;
+			deltaTime_tot = 0.0f;
+		}
+	}	
+}
+
+void Fluid_Euler::outputPLY(int fps, int t, float dt, int n) {
+	// output SDF
+	std::string fileName;
+	for (int frame_num = 0; frame_num < fps * t; frame_num++) {
+		fileName = "C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/sdf/sdf_" + std::to_string(frame_num) + ".txt";
+		std::ofstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Can not open the file " << fileName << std::endl;
+			return;
+		}
+		file << grid_.N1_ << " " << grid_.N2_ << " " << grid_.N3_ << " " << l_ << "\n";
+		for (int i = 0; i < grid_.N1_; i++) for (int j = 0; j < grid_.N2_; j++) for (int k = 0; k < grid_.N3_; k++) {
+			file << grid_.phi_(i, j, k) << "\n";
+		}
+		file.close();
+		std::cout << "sdf " + std::to_string(frame_num) + "\n";
+		for (int i = 0; i < n; i++) {
+			update(dt);
+		}
+	}
+	// output .ply
+	std::string command;
+	for (int frame_num = 0; frame_num < fps * t; frame_num++) {
+		// call python script
+		command = "D:/Anaconda/envs/myenv/python.exe C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/sdf2ply.py -frame "
+			+ std::to_string(frame_num);
+		system(command.c_str());
+		std::cout << "ply " + std::to_string(frame_num) + "\n";
+	}
+	return;
+}
+
+void Fluid_Euler::simple_render(std::string output_file) {
+	// call python script
+	std::string command1 = "D:/Anaconda/envs/myenv/python.exe C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/pv_renderer.py";
+	std::string command2 = "D:/Anaconda/envs/myenv/python.exe C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/png2mp4.py -output_file "
+		+ output_file;
+	// use pyvista to render .ply
+	system(command1.c_str());
+	// png to mp4
+	system(command2.c_str());
+	return;
+}
+
+void Fluid_Euler::pbrt_render(std::string output_file) {
+	// TO DO...
+	return;
+}
+
 

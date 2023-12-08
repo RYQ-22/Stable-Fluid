@@ -7,11 +7,13 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include <cmath>
 #include <time.h>
 #include <cstdlib>
 #include <ctime>
+#include <chrono>
 #include <functional>
 
 #include <vector>
@@ -39,6 +41,7 @@ private:
 	Vec3<float> Vx_temp, Vy_temp, Vz_temp;
 	// level set
 	Vec3<float> phi_;
+	Vec3<int> particles_num_;
 	// boundary
 	//Vec3<int> solid_;
 	Vec3<float> solid_phi_;
@@ -61,7 +64,7 @@ public:
 	float Vz_ave(float i, float j, float k);
 	float phi_ave(float i, float j, float k);
 	float solid_phi_ave(float i, float j, float k);
-	float solid_phi_ave(glm::vec3 pos);
+	float solid_phi_ave(const glm::vec3& pos);
 
 
 	friend class Fluid_Euler;
@@ -73,8 +76,18 @@ private:
 	float l_;	
 	Grid grid_;
 
-	std::vector<glm::vec3> particles_;
 	float particle_radius_;
+	std::vector<glm::vec3> particles_;
+	std::vector<int> grid_idx_;
+	std::vector<float> test_val_;
+
+	// timing
+	float deltaTime = 0.0f;
+	float lastTime = 0.0f;
+	float deltaTime_tot = 0.0f;
+	// calculate frame rate
+	float frameRate = 0;
+	int count = 0;
 
 public:
 	Fluid_Euler(int N1, int N2, int N3, float l, std::vector<float> phi, std::vector<float> solid_phi);
@@ -110,7 +123,10 @@ public:
 	std::vector<float> vertices();
 	std::vector<unsigned int> indices();
 	int show(float dt, int n);
-
+	void run(float dt, int n);// only update, no ui
+	void outputPLY(int fps, int t, float dt, int n);
+	void simple_render(std::string output_file);
+	void pbrt_render(std::string output_file);
 };
 
 template int draw<Fluid_Euler>(Fluid_Euler* obj, float dt, int n);

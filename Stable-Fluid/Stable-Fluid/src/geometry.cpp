@@ -52,6 +52,7 @@ float computeSDF(const aiScene* scene, const aiVector3D& x) {
 }
 
 bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path, std::vector<float>& phi, bool inverse) {
+	std::cout << "Loading " + obj_path << "\n";
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(obj_path, aiProcess_Triangulate | aiProcess_FlipUVs);
 	if (!scene) {
@@ -93,4 +94,43 @@ bool obj_2_SDF(int N1, int N2, int N3, float size, float l, std::string obj_path
 			if (inverse) phi[i * N2 * N3 + j * N3 + k] *= -1;
 		}
 	}
+	std::cout << "Model is loaded.\n";
+	return true;
+}
+
+bool obj_2_SDF_py(int N1, int N2, int N3, int size, float l, std::string obj_path, std::vector<float>& phi, bool inverse) {
+	std::cout << "Loading " + obj_path << "\n";
+	// call python script	
+	std::string command = "D:/Anaconda/envs/myenv/python.exe C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/obj2sdf.py" 
+		+ (" -N1 " + std::to_string(N1))
+		+ " -N2 " + std::to_string(N2) 
+		+ " -N3 " + std::to_string(N3)
+		+ " -size " + std::to_string(size) 
+		+ " -voxel_size " + std::to_string(l) 
+		+ " -input_file " + obj_path 
+		+ " -output_file " + "C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/sdf/temp.txt";
+	system(command.c_str());
+	// read sdf data
+	std::ifstream file("C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/sdf/temp.txt");
+	if (!file.is_open()) {
+		std::cerr << "Error opening file: " << "C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/sdf/temp.txt" << std::endl;
+		return false;
+	}
+	file >> N1 >> N2 >> N3 >> l;
+	phi.resize(N1 * N2 * N3);
+	float value;
+	for (int i = 0; i < N1; i++) for (int j = 0; j < N2; j++) for (int k = 0; k < N3; k++) {
+		if (!(file >> value)) {
+			abort();
+		}
+		phi[i * N2 * N3 + j * N3 + k] = value;		
+		if (inverse) phi[i * N2 * N3 + j * N3 + k] *= -1;
+	}
+	// delet temp.txt
+	file.close();
+	std::cout << "Model is loaded.\n";
+	if (remove(".C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/python/sdf/temp.txt") != 0) {
+		perror("Error deleting file");
+	}
+	return true;
 }
