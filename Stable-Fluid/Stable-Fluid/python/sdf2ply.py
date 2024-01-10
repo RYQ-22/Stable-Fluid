@@ -51,11 +51,12 @@ def main():
     mesh = o3d.geometry.TriangleMesh()
     mesh.vertices = o3d.utility.Vector3dVector(vertices)
     mesh.triangles = o3d.utility.Vector3iVector(faces)
-    mesh = mesh.filter_smooth_simple(number_of_iterations=1)
-    #mesh = mesh.subdivide_loop(number_of_iterations=2)
+    mesh = mesh.filter_smooth_simple(number_of_iterations=2)
+    mesh = mesh.filter_smooth_laplacian(number_of_iterations=2)
+    mesh = mesh.subdivide_loop(number_of_iterations=2)
     vertices = np.asarray(mesh.vertices)
     faces = np.asarray(mesh.triangles)
-    vertices *= 200
+    vertices *= 10
     dtype1 = [('x', 'f4'), ('y', 'f4'), ('z', 'f4')]
     structured_vertices = np.array([tuple(vertex) for vertex in vertices], dtype=dtype1)    
     dtype2 = [('vertex_indices', 'i4', (3,))]    

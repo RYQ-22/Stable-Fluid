@@ -1,12 +1,13 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include "vector3.h"
+#include "field.h"
 
 #include <algorithm>
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <omp.h>
 
 #ifndef M_PI
 const double M_PI = 3.1415926535897932384626433832795;
@@ -51,6 +52,11 @@ inline T min(T a1, T a2, T a3, T a4)
 }
 
 template<class T>
+inline T second(T a1, T a2, T a3) {
+    return a1 + a2 + a3 - max(a1, max(a2, a3)) - min(a1, min(a2, a3));
+}
+
+template<class T>
 inline T min(T a1, T a2, T a3, T a4, T a5)
 {
     return min(min(a1, a2), min(a3, a4), a5);
@@ -60,6 +66,12 @@ template<class T>
 inline T min(T a1, T a2, T a3, T a4, T a5, T a6)
 {
     return min(min(a1, a2), min(a3, a4), min(a5, a6));
+}
+
+template<class T>
+inline T min(T a1, T a2, T a3, T a4, T a5, T a6, T a7, T a8)
+{
+    return min(min(a1, a2), min(a3, a4), min(a5, a6, a7, a8));
 }
 
 template<class T>
@@ -84,6 +96,12 @@ template<class T>
 inline T max(T a1, T a2, T a3, T a4, T a5, T a6)
 {
     return max(max(a1, a2), max(a3, a4), max(a5, a6));
+}
+
+template<class T>
+inline T max(T a1, T a2, T a3, T a4, T a5, T a6, T a7, T a8)
+{
+    return max(max(a1, a2), max(a3, a4), max(a5, a6, a7, a8));
 }
 
 template<class T>
@@ -517,7 +535,39 @@ void write_matlab(std::ostream& output, const std::vector<T>& a, const char* var
 }
 
 template<class T>
-T interpolate_value(float i, float j, float k, const Vec3<T>& v) {
+T sample_min(const glm::vec3& pos, const Field3<T>& v) {
+    int i0 = pos.x > 0 ? (int)pos.x : (int)pos.x - 1;
+    int j0 = pos.y > 0 ? (int)pos.y : (int)pos.y - 1;
+    int k0 = pos.z > 0 ? (int)pos.z : (int)pos.z - 1;
+    return min(
+        v(i0, j0, k0),
+        v(i0 + 1, j0, k0),
+        v(i0, j0 + 1, k0),
+        v(i0, j0, k0 + 1),
+        v(i0 + 1, j0 + 1, k0),
+        v(i0, j0 + 1, k0 + 1),
+        v(i0 + 1, j0, k0 + 1),
+        v(i0 + 1, j0 + 1, k0 + 1));
+}
+
+template<class T>
+T sample_max(const glm::vec3& pos, const Field3<T>& v) {
+    int i0 = pos.x > 0 ? (int)pos.x : (int)pos.x - 1;
+    int j0 = pos.y > 0 ? (int)pos.y : (int)pos.y - 1;
+    int k0 = pos.z > 0 ? (int)pos.z : (int)pos.z - 1;
+    return max(
+        v(i0, j0, k0),
+        v(i0 + 1, j0, k0),
+        v(i0, j0 + 1, k0),
+        v(i0, j0, k0 + 1),
+        v(i0 + 1, j0 + 1, k0),
+        v(i0, j0 + 1, k0 + 1),
+        v(i0 + 1, j0, k0 + 1),
+        v(i0 + 1, j0 + 1, k0 + 1));
+}
+
+template<class T>
+T interpolate_value(float i, float j, float k, const Field3<T>& v) {
     int i0 = i > 0 ? (int)i : (int)i - 1;
     int j0 = j > 0 ? (int)j : (int)j - 1;
     int k0 = k > 0 ? (int)k : (int)k - 1;
@@ -532,10 +582,15 @@ T interpolate_value(float i, float j, float k, const Vec3<T>& v) {
         + v(i0 + 1, j0 + 1, k0) * a2 * b2 * c1
         + v(i0 + 1, j0, k0 + 1) * a2 * b1 * c2
         + v(i0, j0 + 1, k0 + 1) * a1 * b2 * c2;
+} 
+
+template<class T>
+T interpolate_value(const glm::vec3& pos, const Field3<T>& v) {
+    return interpolate_value(pos.x, pos.y, pos.z, v);
 }
 
 template<class T>
-void interpolate_gradient(glm::vec<3, T>& grad, float i, float j, float k, const Vec3<T>& v) {
+void interpolate_gradient(glm::vec<3, T>& grad, float i, float j, float k, const Field3<T>& v) {
     int i0 = i > 0 ? (int)i : (int)i - 1;
     int j0 = j > 0 ? (int)j : (int)j - 1;
     int k0 = k > 0 ? (int)k : (int)k - 1;
@@ -564,8 +619,37 @@ void interpolate_gradient(glm::vec<3, T>& grad, float i, float j, float k, const
 }
 
 template<class T>
-void interpolate_gradient(glm::vec<3, T>& grad, const glm::vec3& pos, const Vec3<T>& v) {
+void interpolate_gradient(glm::vec<3, T>& grad, const glm::vec3& pos, const Field3<T>& v) {
     interpolate_gradient(grad, pos.x, pos.y, pos.z, v);
+}
+
+inline float computeTriangleArea(const float& phi0, const float& phi1, const float& phi2) {
+    if (phi0 > 0 && phi1 > 0 && phi2 > 0) {
+        return 0.0f;
+    }
+    else if (phi0 <= 0 && phi1 <= 0 && phi2 <= 0) {
+        return 1.0f;
+    }
+    else if (second(phi0, phi1, phi2) <= 0) {
+        return max(phi0, phi1, phi2) / (max(phi0, phi1, phi2) - min(phi0, phi1, phi2)) * max(phi0, phi1, phi2) / (max(phi0, phi1, phi2) - second(phi0, phi1, phi2));
+    }
+    else {
+        return 1.0f - min(phi0, phi1, phi2) / (min(phi0, phi1, phi2) - max(phi0, phi1, phi2)) * min(phi0, phi1, phi2) / (min(phi0, phi1, phi2) - second(phi0, phi1, phi2));
+    }
+}
+
+template<class T>
+inline std::vector<T> union_phi(const std::vector<T>& phi1, const std::vector<T>& phi2) {
+    if (phi1.size() != phi2.size()) {
+        abort();
+    }
+    std::vector<T> ans = phi1;
+    for (int i = 0; i < ans.size(); i++) {
+        if (abs(phi1[i]) > abs(phi2[i])) {
+            ans[i] = phi2[i];
+        }
+    }
+    return ans;
 }
 
 #endif

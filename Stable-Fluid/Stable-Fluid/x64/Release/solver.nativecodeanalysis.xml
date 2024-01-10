@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>util.h</FILENAME>
+      <LINE>252</LINE>
+      <COLUMN>14</COLUMN>
+    </SFA>
+    <DEFECTCODE>28251</DEFECTCODE>
+    <DESCRIPTION>“remainder”的批注不一致: 此实例包含 无批注。请参见 d:\windows kits\10\include\10.0.22000.0\ucrt\corecrt_math.h(534)。</DESCRIPTION>
+    <FUNCTION>remainder</FUNCTION>
+    <DECORATED>remainder</DECORATED>
+    <FUNCLINE>252</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>solver.cpp</FILENAME>
+      <LINE>75</LINE>
+      <COLUMN>87</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>Solver::applyPrecon</FUNCTION>
+    <DECORATED>?applyPrecon@Solver@@QEAAXAEBV?$Field3@M@@AEBV?$Field3@H@@@Z</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>solver.cpp</FILENAME>
+      <LINE>75</LINE>
+      <COLUMN>65</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>Solver::applyPrecon</FUNCTION>
+    <DECORATED>?applyPrecon@Solver@@QEAAXAEBV?$Field3@M@@AEBV?$Field3@H@@@Z</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>solver.cpp</FILENAME>
+      <LINE>76</LINE>
+      <COLUMN>87</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>Solver::applyPrecon</FUNCTION>
+    <DECORATED>?applyPrecon@Solver@@QEAAXAEBV?$Field3@M@@AEBV?$Field3@H@@@Z</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>solver.cpp</FILENAME>
+      <LINE>76</LINE>
+      <COLUMN>65</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>Solver::applyPrecon</FUNCTION>
+    <DECORATED>?applyPrecon@Solver@@QEAAXAEBV?$Field3@M@@AEBV?$Field3@H@@@Z</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>solver.cpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>87</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>Solver::applyPrecon</FUNCTION>
+    <DECORATED>?applyPrecon@Solver@@QEAAXAEBV?$Field3@M@@AEBV?$Field3@H@@@Z</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\11862\Desktop\vs_code\Fluid-Simulation\Stable-Fluid\Stable-Fluid\Stable-Fluid\src\</FILEPATH>
+      <FILENAME>solver.cpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>65</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>Solver::applyPrecon</FUNCTION>
+    <DECORATED>?applyPrecon@Solver@@QEAAXAEBV?$Field3@M@@AEBV?$Field3@H@@@Z</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

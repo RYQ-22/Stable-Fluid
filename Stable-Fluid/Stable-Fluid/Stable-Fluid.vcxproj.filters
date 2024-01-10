@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\solver">
+      <UniqueIdentifier>{ddfe7fa1-f62e-412a-a17c-68dd7a1f539e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\renderer">
+      <UniqueIdentifier>{74d82188-d018-4bc7-8b76-00813ad477f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\renderer">
+      <UniqueIdentifier>{effd1735-e89b-4f57-a0b5-0d36b6c3a504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\solver">
+      <UniqueIdentifier>{adcb7cf1-3f60-4d73-b998-9ff70145f12e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -21,19 +33,31 @@
     <ClCompile Include="src\fluid-Euler.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\camera.cpp">
+    <ClCompile Include="src\geometry.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\camera.cpp">
+      <Filter>源文件\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\draw.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\shader.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rigidbody.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\geometry.cpp">
+    <ClCompile Include="src\solver.cpp">
+      <Filter>源文件\solver</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyply.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tiny_obj_loader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,16 +65,7 @@
     <ClInclude Include="src\fluid-Euler.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\vector3.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\camera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\draw.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shader.h">
+    <ClInclude Include="src\field.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\geometry.h">
@@ -60,12 +75,28 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\solver.h">
+      <Filter>头文件\solver</Filter>
+    </ClInclude>
+    <ClInclude Include="src\camera.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\draw.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sparsematrix.h">
+      <Filter>头文件\solver</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rigidbody.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="test.cu">
-      <Filter>源文件</Filter>
-    </CudaCompile>
+    <ClInclude Include="src\tinyply.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tiny_obj_loader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

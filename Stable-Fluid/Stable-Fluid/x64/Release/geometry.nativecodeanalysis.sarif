@@ -1,0 +1,1836 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/include/assimp/types.h"
+                },
+                "region": {
+                  "startLine": 361,
+                  "startColumn": 13,
+                  "endLine": 361,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "aiString::Append",
+                  "decoratedName": "?Append@aiString@@QEAAXPEBD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/include/assimp/types.h"
+                },
+                "region": {
+                  "startLine": 365,
+                  "startColumn": 36,
+                  "endLine": 365,
+                  "endColumn": 42
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "aiString::Append",
+                  "decoratedName": "?Append@aiString@@QEAAXPEBD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "使用未初始化的内存“phi”。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 9,
+                  "endLine": 51,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "computeSDF",
+                  "decoratedName": "?computeSDF@@YAMPEBUaiScene@@AEBV?$aiVector3t@M@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 8
+                          }
+                        },
+                        "message": {
+                          "text": "未初始化“phi”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“i<scene->mNumMeshes”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 51,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 51,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "已使用“phi”，但可能尚未将其初始化"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "使用未初始化的内存“x_max”。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 13,
+                  "endLine": 92,
+                  "endColumn": 13
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 37
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 37
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 58,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "未初始化“x_max”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“i<scene->mNumMeshes”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“i<N1”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 41
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 50
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“j<N2”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 70
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 79
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<N3”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 90,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 91,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 92,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 34
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 92,
+                            "startColumn": 13
+                          }
+                        },
+                        "message": {
+                          "text": "已使用“x_max”，但可能尚未将其初始化"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "使用未初始化的内存“x_min”。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 21,
+                  "endLine": 92,
+                  "endColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 37
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 37
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 58,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 16
+                          }
+                        },
+                        "message": {
+                          "text": "未初始化“x_min”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“i<scene->mNumMeshes”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“i<N1”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 41
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 50
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“j<N2”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 70
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 79
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<N3”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 90,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 91,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 92,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 34
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                          },
+                          "region": {
+                            "startLine": 92,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "已使用“x_min”，但可能尚未将其初始化"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 14,
+                  "endLine": 64,
+                  "endColumn": 24
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 14,
+                  "endLine": 64,
+                  "endColumn": 19
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 93,
+                  "startColumn": 8,
+                  "endLine": 93,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 93,
+                  "startColumn": 8,
+                  "endLine": 93,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 93,
+                  "startColumn": 8,
+                  "endLine": 93,
+                  "endColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 93,
+                  "startColumn": 8,
+                  "endLine": 93,
+                  "endColumn": 12
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 21,
+                  "endLine": 94,
+                  "endColumn": 44
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 21,
+                  "endLine": 94,
+                  "endColumn": 39
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 21,
+                  "endLine": 94,
+                  "endColumn": 30
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 21,
+                  "endLine": 94,
+                  "endColumn": 25
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF",
+                  "decoratedName": "?obj_2_SDF@@YA_NHHHMMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 121,
+                  "startColumn": 13,
+                  "endLine": 121,
+                  "endColumn": 23
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 121,
+                  "startColumn": 13,
+                  "endLine": 121,
+                  "endColumn": 18
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 7,
+                  "endLine": 127,
+                  "endColumn": 30
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 7,
+                  "endLine": 127,
+                  "endColumn": 25
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 7,
+                  "endLine": 127,
+                  "endColumn": 16
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 7,
+                  "endLine": 127,
+                  "endColumn": 11
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 128,
+                  "startColumn": 20,
+                  "endLine": 128,
+                  "endColumn": 43
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 128,
+                  "startColumn": 20,
+                  "endLine": 128,
+                  "endColumn": 38
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 128,
+                  "startColumn": 20,
+                  "endLine": 128,
+                  "endColumn": 29
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 * ，然后将结果转换到 8 字节值。在调用运算符 * 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+                },
+                "region": {
+                  "startLine": 128,
+                  "startColumn": 20,
+                  "endLine": 128,
+                  "endColumn": 24
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "obj_2_SDF_py",
+                  "decoratedName": "?obj_2_SDF_py@@YA_NHHHHMV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@MV?$allocator@M@std@@@2@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.36.32534.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/include/assimp/types.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "e30b21307ff777c0783111d5725238a44232a4e3939261b7a1a12fba615797f6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/11862/Desktop/vs_code/Fluid-Simulation/Stable-Fluid/Stable-Fluid/Stable-Fluid/src/geometry.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c9d8bfec74df6af32dc4792f236ab118725e3c074229c92ba2c38befc941baa0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/src/geometry.h"
+          },
+          "hashes": {
+            "sha-256": "767004db68d915c8823532f96ba1086840d9db7c117764f0134bf40107628551"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/importer.hpp"
+          },
+          "hashes": {
+            "sha-256": "f702738aaeed2aeb1df21688fc92c6e6cadb7ca28d9d4a02e724897aeff7120a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/defs.h"
+          },
+          "hashes": {
+            "sha-256": "e6a3197c83b51219226e7cffc72c04f53f7c1b6756995d27688d12ff6a40cab3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/config.h"
+          },
+          "hashes": {
+            "sha-256": "d52fcb814e81243bc426d8af5b30cfc62c2e38d101cbfc20b40d716f0f232f00"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/vector2.h"
+          },
+          "hashes": {
+            "sha-256": "04cba85b95e1309e20e94f55a55f50d9793351ece69c676f6c5ea635c77fd13d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/vector3.h"
+          },
+          "hashes": {
+            "sha-256": "aa661822c80c1ae8fee6244cd616fb9effff66716daaf65c1528a8864e3c72dd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/color4.h"
+          },
+          "hashes": {
+            "sha-256": "f87a273f074d94788c1642787b6f690050aff1b63f6a3c656742299cc346b03e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/matrix3x3.h"
+          },
+          "hashes": {
+            "sha-256": "633f105133331cd5e9007a23287d8cf47d6826d8b8702eef38707124523c3255"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/matrix4x4.h"
+          },
+          "hashes": {
+            "sha-256": "c5087434e26a2d43df04071226eee20e5ba0a5b7befbdb0b8820b603d8526668"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/quaternion.h"
+          },
+          "hashes": {
+            "sha-256": "39fc3ec394c9d36f825d0daf0623ba2d328d4222f84ddbece29ad86a6af14837"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/vector2.inl"
+          },
+          "hashes": {
+            "sha-256": "40158a824b57cff0e08f47469c54de9479519a568d021578378c467be5fc21fe"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/vector3.inl"
+          },
+          "hashes": {
+            "sha-256": "5d11b7548d33b49e880a1b7bf3db8c3c0290815a2653f49cdadf09a2c3bdbeff"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/color4.inl"
+          },
+          "hashes": {
+            "sha-256": "05c158704bb9768b7be8cd1e2e8740d990a0cae0df071abee0038d457eba86b4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/matrix3x3.inl"
+          },
+          "hashes": {
+            "sha-256": "4223b31c875db4562c95720edc22f178abffa5d49c0da4a8c60528273fef12ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/matrix4x4.inl"
+          },
+          "hashes": {
+            "sha-256": "20dff200b242051da60b213017dcfe2b8d1b746ac61e772ffc904633ec165c57"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/mathfunctions.h"
+          },
+          "hashes": {
+            "sha-256": "3e5540d720d1d67e988fd5595f15d70fe84f08abfdf010a26f3539be465d2f39"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/quaternion.inl"
+          },
+          "hashes": {
+            "sha-256": "851167470c5a1cb642cf3654d3a1246c171d42a0660624bf369cdcba52c5385d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/scene.h"
+          },
+          "hashes": {
+            "sha-256": "4511f67ae7a7dcb5b3423b5b34dbab6ff93b22019f32ded191b7d9bc9eaffb30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/texture.h"
+          },
+          "hashes": {
+            "sha-256": "a720f1b24ae4ebb297eeb658f420ae1d21dec2fae52865e38feebb6b465ba28b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/compiler/pushpack1.h"
+          },
+          "hashes": {
+            "sha-256": "d8df458c394c3afa149403914e03c86dcb6e1dca1af4d366b52541f61d0dd116"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/compiler/poppack1.h"
+          },
+          "hashes": {
+            "sha-256": "0dccb098bbdd32dfcd67a0029d9f48133a38586b91c314b9045366028721537b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/mesh.h"
+          },
+          "hashes": {
+            "sha-256": "25f1d72b6a66cad8e4a3daf8613d13d3186c4df4c9524982f1a6c7fe448124d2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/aabb.h"
+          },
+          "hashes": {
+            "sha-256": "e5a90890e6c975e777ef20b1c3234b410ebd52d5c0ebc65a512c0c0492ad63b5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/light.h"
+          },
+          "hashes": {
+            "sha-256": "e126d01ba693eb2767ba4251f6f761fd56bed84ec8ea911edc26532aef61e4af"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/camera.h"
+          },
+          "hashes": {
+            "sha-256": "68dd7e58b38af38ab0838536b63f650fa7dbda683770711cfddaf375977e7dfd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/material.h"
+          },
+          "hashes": {
+            "sha-256": "28480d25abde03030888e3b43c113890f630f31e8b8ddac1a4fbb37f1c7a41c0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/material.inl"
+          },
+          "hashes": {
+            "sha-256": "d1f203a41f156ebbdc34f12532aeefe0dd609b6ed648c3934149db01361adaab"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/anim.h"
+          },
+          "hashes": {
+            "sha-256": "6978c97be8ae9b8312ac778c9601c4b25ee9e947eca36034cc70865d23000c6b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/metadata.h"
+          },
+          "hashes": {
+            "sha-256": "878176406caa60df9b31f5449a55d8b117c964e046d4e3dc597276c42b191019"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/11862/desktop/vs_code/fluid-simulation/stable-fluid/stable-fluid/stable-fluid/include/assimp/postprocess.h"
+          },
+          "hashes": {
+            "sha-256": "b88e66291c317735dcf8cbec90b228f14589d63bc6b6317c977340bcec85fd43"
+          }
+        }
+      ]
+    }
+  ]
+}

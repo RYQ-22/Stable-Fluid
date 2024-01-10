@@ -7,7 +7,6 @@ def images_to_video(image_folder, output_file, fps=30):
     images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
     images.sort(key=lambda x: int(x.split('_')[1].split('.')[0]))
 
-
     # get shape
     frame = cv2.imread(os.path.join(image_folder, images[0]))
     height, width, layers = frame.shape
@@ -30,7 +29,9 @@ if __name__ == "__main__":
     # output
     parser = argparse.ArgumentParser(description='get output_path')
     parser.add_argument('-output_file', type=str, help='Description for output file')
+    parser.add_argument('-fps', type=int, help='Description for frame per second', default=30)
     args = parser.parse_args()
     output_file = args.output_file
+    fps = args.fps
     
-    images_to_video(input_folder, output_file)
+    images_to_video(input_folder, output_file, fps)
